@@ -1,0 +1,15 @@
+{
+  "name": "v-capture",
+  "version": "1.0.0",
+  "description": "a chrome extension (maybe a video downloader? a network proxy? just a demo?  whatever......)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "author": "Sweet Tang",
+  "license": "ISC"
+}
