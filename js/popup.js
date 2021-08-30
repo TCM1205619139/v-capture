@@ -1,25 +1,24 @@
-import EventManager from './EventManager.js'
+import Message from './message.js'
 
 const initVue = () => {
   return new Vue({
     el: '#popup',
     name: 'POPUP',
     data: {
-      message: 'v-capture',
+      title: 'v-capture',
       isWork: true,
+      networkProxyOpen: false
     },
     created () {
-      this.eventManager = EventManager.getInstance()
-      this.BACKGROUND = this.eventManager.register('POPUP', 'BACKGROUND')
-    },
-    destroyed () {
-      this.eventManager = null
+      this.message = new Message('POPUP', 'CONTENT')
+      this.message.sendMessage('message', {name: 'sweet'}, this.sendMessageFn)
     },
     methods: {
-      networkProxy () {
-        this.BACKGROUND.dispatch(e => {
-          console.log(e)
-        })
+      networkProxy (state) {
+        this.networkProxyOpen = state
+      },
+      sendMessageFn (...args) {
+        console.log('sendMessageFn >>>', args)
       }
     }
   })
