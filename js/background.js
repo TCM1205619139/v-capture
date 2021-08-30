@@ -1,13 +1,16 @@
-window.onload = () => {
-    initVue()
-}
 
 const initVue = () => {
-    const vue = new Vue({
-        el: '#app',
-        data: {
-            message: 'background.html'
-        }
-    })
-    console.log(vue);
+  return new Vue({
+    el: '#background',
+    name: 'BACKGROUND',
+    data: {
+      message: 'background.html'
+    },
+    created () {
+    },
+    destroyed () {
+    },
+  })
 }
+
+window.vueApp = initVue()

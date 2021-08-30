@@ -1,0 +1,60 @@
+.switch-component {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  user-select: none;
+}
+
+.switch-component .selected {
+  background-color: #1ca8d5;
+}
+
+div[class^="switch-content"] {
+  position: relative;
+  background-color: #716b6b;
+}
+.switch-content-large {
+  width: 50px;
+  height: 25px;
+  border-radius: 25px;
+  padding: 0 25px;
+}
+.switch-content-normal {
+  width: 50px;
+  height: 22px;
+  border-radius: 22px;
+  padding: 0 25px;
+}
+.switch-content-small {
+  width: 40px;
+  height: 18px;
+  border-radius: 18px;
+  padding: 0 20px;
+}
+.point {
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+  height: 90%;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: aliceblue;
+}
+.point-left {
+  left: 1px;
+  transition: all 0.5s;
+}
+.point-right {
+  right: 1px;
+  transition: all 0.5s;
+}
+.switch-content-large .point {
+  width: 24px;
+}
+.switch-content-normal .point {
+  width: 21px;
+}
+.switch-content-small .point {
+  width: 17px;
+}

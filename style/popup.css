@@ -1,0 +1,41 @@
+#popup {
+    border-radius: 5px;
+    width: 300px;
+    min-height: 200px;
+}
+
+.container {
+    padding: 5px;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 16px;
+    border-bottom: 1px solid #e3e3e3;
+    padding-bottom: 5px;
+}
+
+.success {
+    color: #0cb60c;
+}
+
+.error {
+    color: #ec0c0c;
+}
+
+.body {
+    margin: 5px 5px 0 5px;
+}
+
+.radio {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-top: 10px;
+}
