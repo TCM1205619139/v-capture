@@ -18,13 +18,16 @@
     <div class="body">
       <div class="radio">
         <span>开启视频检测</span>
-        <cap-switch></cap-switch>
+        <cap-switch @on-change="openVideoMonitor"></cap-switch>
       </div>
       <div class="radio">
         <span>开启网络代理</span>
-        <cap-switch @on-change="networkProxy"></cap-switch>
+        <cap-switch @on-change="openNetworkProxy"></cap-switch>
       </div>
-      <div class="radio"></div>
+      <div class="radio">
+        <span>属性注入</span>
+        <cap-switch @on-change="openPropsInject"></cap-switch>
+      </div>
     </div>
   </div>
   <div v-else class="container">

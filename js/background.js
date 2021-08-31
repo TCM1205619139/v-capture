@@ -1,3 +1,4 @@
+import Message from './message.js'
 
 const initVue = () => {
   return new Vue({

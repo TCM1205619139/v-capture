@@ -10,12 +10,12 @@ const MessageDict = [
   {
     local: ExtensionType.CONTENT,
     origin: ExtensionType.POPUP,
-    send: chrome.runtime.sendMessage,
+    send: chrome.runtime?.sendMessage,
   },
   {
     local: ExtensionType.CONTENT,
     origin: ExtensionType.BACKGROUND,
-    send: chrome.runtime.sendMessage
+    send: chrome.runtime?.sendMessage
   },
   {
     local: ExtensionType.CONTENT,
@@ -25,12 +25,12 @@ const MessageDict = [
   {
     local: ExtensionType.INJECT,
     origin: ExtensionType.POPUP,
-    send: chrome.runtime.sendMessage
+    send: chrome.runtime?.sendMessage
   },
   {
     local: ExtensionType.INJECT,
     origin: ExtensionType.BACKGROUND,
-    send: chrome.runtime.sendMessage
+    send: chrome.runtime?.sendMessage
   },
   {
     local: ExtensionType.INJECT,
@@ -40,22 +40,22 @@ const MessageDict = [
   {
     local: ExtensionType.POPUP,
     origin: ExtensionType.CONTENT,
-    send: chrome.tabs.sendMessage
+    send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionType.POPUP,
     origin: ExtensionType.INJECT,
-    send: chrome.tabs.sendMessage
+    send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionType.BACKGROUND,
     origin: ExtensionType.CONTENT,
-    send: chrome.tabs.sendMessage
+    send: chrome.tabs?.sendMessage
   },
   {
     local: ExtensionType.BACKGROUND,
     origin: ExtensionType.INJECT,
-    send: chrome.tabs.sendMessage
+    send: chrome.tabs?.sendMessage
   }
 ]
 
@@ -116,10 +116,14 @@ export default class Message {
   }
 
   onMessage(type, callback) {
-    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-      console.log(request)
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+      sender.origin = this.origin
 
-      sendResponse({code: 0})
+      if (request.type === type && callback) {
+        callback(request, sender)
+      }
+
+      sendResponse(true)
     })
   }
 }
