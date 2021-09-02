@@ -1,9 +1,10 @@
-const ExtensionType = { // 暂时排除与devtools的通信
+export const ExtensionType = { // 暂时排除与devtools的通信
   INJECT: 'INJECT',
   CONTENT: 'CONTENT',
   POPUP: 'POPUP',
   BACKGROUND: 'BACKGROUND',
-  DEVTOOL: 'DEVTOOL'
+  DEVTOOL: 'DEVTOOL',
+  OPTION: 'OPTION'
 }
 
 const MessageDict = [
@@ -62,15 +63,17 @@ const MessageDict = [
 /**
  * Message为短链接，不进行事件缓存
  */
-export default class Message {
+export class Message {
   /**
    * 构造消息发送类，传入发送点和接受点
    * @param {ExtensionType} from
    * @param {ExtensionType} to
+   * @param {Window} context
    */
-  constructor(from, to) {
+  constructor(from, to, context) {
     this.local = from
     this.origin = to
+    this.context = context
     this.send = this.findMethod('send')
     // this.receive = this.findMethod('receive')
   }
@@ -81,9 +84,17 @@ export default class Message {
    * @returns {Function}
    */
   findMethod(key) {
-    return MessageDict.find(item => {
+    const dict = MessageDict.find(item => {
       return item.local === this.local && item.origin === this.origin
-    })[key]
+    })
+    if (!dict) {
+      if (this.origin === ExtensionType.BACKGROUND)
+        throw new Error(`can't send message from '${this.local}' to '${this.origin}',
+        you can use 'chrome.extension.getBackgroundPage' to get '${this.origin}' window`)
+      else throw new Error(`can't send message from '${this.local}' to '${this.origin}',
+        you can use 'chrome.extension.getViews' to get '${this.origin}' window`)
+    }
+    return dict[key]
   }
 
   /**
@@ -93,6 +104,12 @@ export default class Message {
    * @param {Function} callback
    */
   sendMessage(type, data, callback) {
+    // option --> background
+    if (this.from === ExtensionType.OPTION) {
+      this.context.vueApp.setState('')
+      return
+    }
+
     const PB = ['POPUP', 'BACKGROUND']
     const IC = ['INJECT', 'CONTENT']
     const message = {type, data}

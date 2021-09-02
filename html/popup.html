@@ -7,27 +7,20 @@
   <title>Document</title>
   <!-- 鼠标点击右上角扩展图标时出现的popup页面，可再次改变扩展的一些配置文件 -->
 </head>
-<link rel="stylesheet" href="/style/custom.css">
-<link rel="stylesheet" href="/style/normalize.css">
 <link rel="stylesheet" href="/style/components.css">
 <link rel="stylesheet" href="/style/popup.css">
 <body>
 <div id="popup">
   <div v-if="isWork" class="container">
-    <p class="title success">{{title}}</p>
+    <p class="title success line">{{title}}</p>
     <div class="body">
-      <div class="radio">
-        <span>开启视频检测</span>
-        <cap-switch @on-change="openVideoMonitor"></cap-switch>
+      <div class="shi-heng">
+        <div class="row"><span>url路径：</span><input type="text" v-model="shiheng.url"></div>
+        <div class="row"><span>账号：</span><input type="text" v-model="shiheng.account"></div>
+        <div class="row"><span>密码：</span><input type="password" v-model="shiheng.password"></div>
+        <input class="submit" type="submit" value="仕桁专用" @click="submit">
       </div>
-      <div class="radio">
-        <span>开启网络代理</span>
-        <cap-switch @on-change="openNetworkProxy"></cap-switch>
-      </div>
-      <div class="radio">
-        <span>属性注入</span>
-        <cap-switch @on-change="openPropsInject"></cap-switch>
-      </div>
+      <p class="line"></p>
     </div>
   </div>
   <div v-else class="container">

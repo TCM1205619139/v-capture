@@ -87,10 +87,10 @@
       "newtab": "newtab.html"
   }, */
   // Chrome40以前的插件配置页写法
-  "options_page": "options.html",
+  "options_page": "option.html",
   // Chrome40以后的插件配置页写法，如果2个都写，新版Chrome只认后面这一个
   "options_ui": {
-    "page": "html/options.html",
+    "page": "html/option.html",
     // 添加一些默认的样式，推荐使用
     "chrome_style": true
   },

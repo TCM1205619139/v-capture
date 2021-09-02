@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="/style/normalize.css">
+<link rel="stylesheet" href="/style/custom.css">
+<link rel="stylesheet" href="/style/components.css">
+<link rel="stylesheet" href="/style/option.css">
+<body>
+<div id="options">
+  <hr>
+  <div class="body">
+    <div class="option">
+      <div class="radio">
+        <span>开启视频检测</span>
+        <cap-switch @on-change="openVideoMonitor" :value="videoMonitorOpen"></cap-switch>
+<!--        <cap-switch @on-change="openVideoMonitor" v-model="videoMonitorOpen"></cap-switch>-->
+      </div>
+    </div>
+    <div class="option">
+      <div class="radio">
+        <span>开启网络代理</span>
+        <cap-switch @on-change="openNetworkProxy" :value="networkProxyOpen"></cap-switch>
+      </div>
+    </div>
+    <div class="option">
+      <div class="radio">
+        <span>仕桁专供功能</span>
+        <cap-switch @on-change="openPropsInject" :value="propsInjectOpen"></cap-switch>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script type="module" src="/js/vue-2.6.14.js"></script>
+<script type="module" src="/js/components.js"></script>
+<script type="module" src="/js/option.js"></script>
+</html>

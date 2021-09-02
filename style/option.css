@@ -1,0 +1,29 @@
+@import "normalize.css";
+@import "custom.css";
+
+#options {
+  width: 500px;
+  z-index: 1;
+  background-color: white;
+  user-select: none;
+}
+
+#options > hr {
+  border-color: #3acbfd;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.option {
+  padding: 10px 20px;
+}
+
+.option .radio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

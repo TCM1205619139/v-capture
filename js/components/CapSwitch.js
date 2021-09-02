@@ -6,9 +6,9 @@ export default {
     '',
   name: 'CapSwitch',
   props: {
-    name: {
-      type: String,
-      required: false,
+    value: {
+      required: true,
+      type: Boolean
     },
     size: {
       type: String,
@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      selected: false
+      selected: this.value
     }
   },
   methods: {

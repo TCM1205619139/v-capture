@@ -7,7 +7,8 @@ class Message {
       sender.origin = this.origin
 
       if (request.type === type && callback) {
-        callback(request, sender)
+        // 不知道为什么一次message的发送会触发四次onMessage监听，虽然这里不影响
+        callback(request.data, sender)
       }
 
       sendResponse(true)
@@ -23,10 +24,12 @@ const changeNetworkFn = (request, sender) => {
 
 }
 
-const changePropsFn = (request, sender) => {
-
+const changeHtmlPropsFn = (data, sender) => {
+  console.log(data)
+  console.log(sender)
+  confirm('请输入')
 }
 const message = new Message()
 message.onMessage('video', changeVideoFn)
 message.onMessage('network', changeNetworkFn)
-message.onMessage('open-inject', changePropsFn)
+message.onMessage('open-inject', changeHtmlPropsFn)

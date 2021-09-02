@@ -1,4 +1,4 @@
-import Message from './message.js'
+import {Message} from './message.js'
 
 const initVue = () => {
   return new Vue({
@@ -7,32 +7,28 @@ const initVue = () => {
     data: {
       title: 'v-capture',
       isWork: true,
-      networkProxyOpen: localStorage.getItem('networkProxyOpen') || false,
-      videoMonitorOpen: localStorage.getItem('videoMonitorOpen') || false,
-      propsInjectOpen: localStorage.getItem('propsInjectOpen') || false
+      option: {},
+      shiheng: {
+        url: '11',
+        account: '',
+        password: ''
+      }
     },
     created () {
       this.message = new Message('POPUP', 'CONTENT')
+      this.backgroundPage = chrome.extension.getBackgroundPage()
+      this.option = this.backgroundPage.vueApp.getValue('optionPageData')
+    },
+    destroyed () {
+      setTimeout(() => {
+        alert('')
+        console.log(1)
+      }, 500)
     },
     methods: {
-      setState (type, state, propName) {
-        // return function (state) {
-          this[propName] = state
-          this.message.sendMessage(type, {value: state})
-          localStorage.setItem(propName, state)
-        // }
-      },
-      openVideoMonitor (state) {
-        this.setState('video', state, 'videoMonitorOpen')
-      },
-      openNetworkProxy (state) {
-        this.setState('network', state, 'videoMonitorOpen')
-      },
-      openPropsInject (state) {
-        this.setState('open-inject', state, 'propsInjectOpen')
+      submit () {
+        console.log(1)
       }
-      // openNetworkProxy: this.setState('network', 'networkProxyOpen'),
-      // openPropsInject: this.setState('open-inject', 'propsInjectOpen')
     }
   })
 }
