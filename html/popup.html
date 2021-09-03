@@ -14,13 +14,6 @@
   <div v-if="isWork" class="container">
     <p class="title success line">{{title}}</p>
     <div class="body">
-      <div class="shi-heng">
-        <div class="row"><span>url路径：</span><input type="text" v-model="shiheng.url"></div>
-        <div class="row"><span>账号：</span><input type="text" v-model="shiheng.account"></div>
-        <div class="row"><span>密码：</span><input type="password" v-model="shiheng.password"></div>
-        <input class="submit" type="submit" value="仕桁专用" @click="submit">
-      </div>
-      <p class="line"></p>
     </div>
   </div>
   <div v-else class="container">

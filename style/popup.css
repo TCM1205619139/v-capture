@@ -71,7 +71,10 @@ input {
 .shi-heng .submit {
   padding: 5px;
   border: 1px solid rgb(26, 115, 232);
-  border-radius: 10%;
+  border-radius: 5px;
   color: rgb(26, 115, 232);
   background-color: white;
+}
+.shi-heng .submit:active {
+  border: 1px solid rgb(161, 190, 227);
 }

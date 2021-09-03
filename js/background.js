@@ -1,9 +1,10 @@
-import {Message} from './message.js'
+import {Message, ExtensionType} from './message.js'
 
 const initVue = () => {
   return new Vue({
     el: '#background',
     name: 'BACKGROUND',
+    messageB2C: null,
     data: {
       message: 'background.html',
       optionPageData: {}, // 用于接收管理option页面发送的数据
@@ -38,6 +39,16 @@ const initVue = () => {
       this.contentPageData = this.getValue('contentPageData') || {}
       this.popupPageData = this.getValue('popupPageData') || {}
       this.injectPageData = this.getValue('injectPageData') || {}
+      this.messageB2C = new Message(ExtensionType.BACKGROUND, ExtensionType.CONTENT)
+      this.messageB2C.sendMessage('open-inject', (request, sender) => {
+        console.log(request, sender)
+      })
+      this.messageB2C.onMessage('view', (request, sender) => {
+        // 使用箭头函数 this 为Vue实例，使用function为 Message 实例
+        return {
+          ...this.optionPageData
+        }
+      })
     },
     destroyed () {
     }

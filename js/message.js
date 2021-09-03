@@ -99,7 +99,7 @@ export class Message {
 
   /**
    * 发送消息
-   * @param {ExtensionType} type
+   * @param {String} type
    * @param {Object} data
    * @param {Function} callback
    */
@@ -112,7 +112,7 @@ export class Message {
 
     const PB = ['POPUP', 'BACKGROUND']
     const IC = ['INJECT', 'CONTENT']
-    const message = {type, data}
+    const message = {type, data, timestamp: this.getTimestamp()}
     const options = {active: true, currentWindow: true}
 
     chrome.tabs.query(options, tabs => {
@@ -133,15 +133,23 @@ export class Message {
   }
 
   onMessage(type, callback) {
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+      let response = null
       sender.origin = this.origin
 
       if (request.type === type && callback) {
-        callback(request, sender)
+        response = await callback.call(this, request, sender)
       }
 
-      sendResponse(true)
+      sendResponse({
+        data: response,
+        state: true
+      })
     })
+  }
+
+  getTimestamp () {
+    return new Date().getTime()
   }
 }
 
