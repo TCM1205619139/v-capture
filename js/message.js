@@ -121,7 +121,7 @@ export class Message {
        */
       if (PB.indexOf(this.local) !== -1 && IC.indexOf(this.origin) !== -1) {
         // chrome.tabs.sendMessage
-        this.send(tabs[0].id, message, callback)
+        this.send(tabs[0]?.id, message, callback)
       } else if (IC.indexOf(this.local) !== -1 && PB.indexOf(this.origin) !== -1) {
         // chrome.runtime.sendMessage
         this.send(message, callback)

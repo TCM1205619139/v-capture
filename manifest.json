@@ -44,6 +44,7 @@
       // "matches": ["<all_urls>"],
       // 多个JS按顺序注入
       "js": [
+        "js/axios.js",
         "js/content-script.js"
       ],
       "css": [],
