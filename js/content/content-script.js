@@ -32,7 +32,7 @@ const changeNetworkFn = (state) => {
 
 }
 
-const getCsrfToekn = () => {
+const getCsrfToken = () => {
   return new Promise((resolve, reject) => {
     const items = document.cookie.split(';')
     const temp = items.find(item => {
@@ -49,9 +49,9 @@ const changeHtmlPropsFn = (state) => {
   console.log(document.cookie)
 }
 
-const message = new Message('CONTENT', 'BACKGROUND')
+const C2BMessage = new Message('CONTENT', 'BACKGROUND')
 
-message.sendMessage('view', {}, (response) => {
+C2BMessage.sendMessage('view', {}, (response) => {
   if (!response.state) return
 
   const {videoMonitorOpen, networkProxyOpen, propsInjectOpen} = response.data
@@ -60,17 +60,17 @@ message.sendMessage('view', {}, (response) => {
   changeHtmlPropsFn(propsInjectOpen)
 })
 
-message.onMessage('beforeRequest', (request) => {
+C2BMessage.onMessage('beforeRequest', (request) => {
   if (request.data.type !== 'xmlhttprequest') return
   console.log('beforeRequest >>>', request)
 })
 
-message.onMessage('responseStarted', (response) => {
+C2BMessage.onMessage('responseStarted', (response) => {
   if (response.data.type !== 'xmlhttprequest') return
   console.log('responseStarted >>>', response)
 })
 
-message.onMessage('beforeSendHeaders', response => {
+C2BMessage.onMessage('beforeSendHeaders', response => {
   if (response.data.type !== 'xmlhttprequest') return
   console.log('beforeSendHeaders >>>', response)
 })

@@ -1,3 +1,9 @@
+/**
+ * **********************************************
+ * 这个文件的功能已被拆分至 connect.js 与 message.js
+ * **********************************************
+ */
+
 import {Message, ExtensionType} from './message.js'
 import Request from './request.js'
 
@@ -5,7 +11,7 @@ const initVue = () => {
   return new Vue({
     el: '#background',
     name: 'BACKGROUND',
-    messageB2C: null,
+    B2CMessage: null,
     data: {
       message: 'background.html',
       optionPageData: {}, // 用于接收管理option页面发送的数据
@@ -34,10 +40,11 @@ const initVue = () => {
       getValue(key) {
         return JSON.parse(localStorage.getItem(key))
       },
-      createMessageB2C() {
-        this.messageB2C = new Message(ExtensionType.BACKGROUND, ExtensionType.CONTENT)
+      createB2CMessage() {
+        this.B2CMessage = new Message(ExtensionType.BACKGROUND, ExtensionType.CONTENT)
 
-        this.messageB2C.onMessage('view', (request, sender) => {
+        this.B2CMessage.onMessage('view', (request, sender) => {
+          // 接收到
           // 使用箭头函数 this 为Vue实例，使用function为 Message 实例
           return this.optionPageData
         })
@@ -46,15 +53,15 @@ const initVue = () => {
         const requestListener = new Request()
 
         requestListener.on('onResponseStarted', (...details) => {
-          this.messageB2C.sendMessage('responseStarted', ...details)
+          this.B2CMessage.sendMessage('responseStarted', ...details)
         })
 
         requestListener.on('onBeforeRequest', (...details) => {
-          this.messageB2C.sendMessage('beforeRequest', ...details)
+          this.B2CMessage.sendMessage('beforeRequest', ...details)
         })
 
         requestListener.on('onBeforeSendHeaders', (...details) => {
-          this.messageB2C.sendMessage('beforeSendHeaders', ...details)
+          this.B2CMessage.sendMessage('beforeSendHeaders', ...details)
         })
       }
     },
@@ -64,7 +71,7 @@ const initVue = () => {
       this.popupPageData = this.getValue('popupPageData') || {}
       this.injectPageData = this.getValue('injectPageData') || {}
 
-      this.createMessageB2C()
+      this.createB2CMessage()
       this.createWebRequestListener()
     },
     destroyed() {

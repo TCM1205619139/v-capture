@@ -163,6 +163,6 @@ class Event {
         return this.send()
       }
     })
-
   }
 }
+
